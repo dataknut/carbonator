@@ -7,15 +7,15 @@
 #    http://shiny.rstudio.com/
 #
 
-dSource <- "https://lowcarbonbuildings.wordpress.com/2020/02/29/the-carbon-footprint-of-production-and-how-much-it-matters-part-1"
-beisSource <- "https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2019"
-
 library(shiny)
 library(ggplot2)
 library(data.table)
 
 # Parameters ----
 appUrl <- "https://twitter.com/intent/tweet?text=carbonator%20from%20@dataknut%20@energySoton&url=https://dataknut.shinyapps.io/Carbonator/"
+dSource <- "https://lowcarbonbuildings.wordpress.com/2020/02/29/the-carbon-footprint-of-production-and-how-much-it-matters-part-1"
+beisSource <- "https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2019"
+cseReport <- "https://www.cse.org.uk/downloads/file/distribution_of_uk_carbon_emissions_implications_for_domestic_energy_policy.pdf#page=32&zoom=auto,-22,787"
 
 # load conversion factors ----
 factor_dt <- data.table::fread("data/2019.csv") # coding and labels matter - we use them below
@@ -23,14 +23,14 @@ factor_dt <- data.table::fread("data/2019.csv") # coding and labels matter - we 
 # Define UI ----
 ui <- fluidPage(
 
-    # Application title
+    # > Application title ----
     titlePanel("The Carbonator - a UK personal emissions explorer"),
 
-    # Sidebar with a slider input for number of bins 
+    # > plot def ----
     sidebarLayout(position = "right",
         sidebarPanel(
-            h3("Your carbon"),
-            # Output: Bar chart
+            h3("You, carbonated"),
+            # Output: Bar chart here
             plotOutput(outputId = "distPlot")
         ),
 
@@ -38,7 +38,7 @@ ui <- fluidPage(
         mainPanel(
             tabsetPanel(type = "tabs",
                         tabPanel("Heat and hot water", 
-                                 # > Heat & hot water ----
+                                 # >> Heat & hot water tab ----
                                  fluidRow(
                                      column(3,helpText("Electricity (", 
                                                        factor_dt[Contributor == "Electricity", unit],")"
@@ -102,7 +102,7 @@ ui <- fluidPage(
                                  )
                                  ),
                         tabPanel("Car use",
-                                 # > Car use ----
+                                 # >> Car use tab ----
                                  fluidRow(
                                      column(4,helpText("Car petrol < 1.4l (", factor_dt[Contributor %like% "< 1.4", unit], ")"
                                      )
@@ -189,7 +189,7 @@ ui <- fluidPage(
                                  )
                                  ),
                         tabPanel("Public transport", 
-                                 # > Pubic transport ----
+                                 # >> Public transport tab ----
                                  fluidRow(
                                      column(3,helpText("Bus (", factor_dt[Contributor %like% "Bus", unit], ")"
                                      )
@@ -228,7 +228,7 @@ ui <- fluidPage(
                                  )
                                  ),
                         tabPanel("Diet", 
-                                 # > Diet ----
+                                 # >> Diet tab ----
                                  fluidRow(
                                      column(4,helpText("Diet (choose)"
                                      )
@@ -249,12 +249,32 @@ ui <- fluidPage(
                                      )
                                  )
                                  ),
-                        tabPanel("How to...", 
-                                 # > How to ----
+                        tabPanel("How do I...", 
+                                 # >> How to tab ----
                                  h3("Use the carbonator?"),
                                  p("Enter your own yearly numbers to get your annual CO2e carbon footprint (in kg)."),
                                  p("Or just enter any old number to see what happens. For example you can compare trains & planes for the same journey distance."),
                                  p("To reset the default values just reload the page."),
+                                 h3("Check my results are 'right'?"),
+                                 p("Tricky one. We think the calculations are 'right' given the inputs (conversion factors).",
+                                   "But if you want to get technical you could look at the Centre for Sustainable Energy's ",
+                                   a("excellent report", 
+                                     href = cseReport),
+                                   ". ",
+                                   "If you really really think they're wrong, raise an issue on the code ",
+                                     a("repo.", 
+                                       href="https://github.com/dataknut/carbonator/issues?q=is%3Aissue")
+                                   ),
+                                 h3("Spread the word?"),
+                                 p( 
+                                     #https://community.rstudio.com/t/include-a-button-in-a-shiny-app-to-tweet-the-url-to-the-app/8113/2
+                                     # Create url with the 'twitter-share-button' class
+                                     tags$a(href=appUrl, "Twitter", class="twitter-share-button"),
+                                     # Copy the script from https://dev.twitter.com/web/javascript/loading into your app
+                                     # You can source it from the URL below. It must go after you've created your link
+                                     includeScript("http://platform.twitter.com/widgets.js"),
+                                     " is our viral medium of choice."
+                                 ),
                                  h3("Check the data sources?"),
                                  p("We've used United Kingdom (UK) conversion factors from Judith Thornton's ",
                                    a("carbon footprint calculator", 
@@ -266,32 +286,36 @@ ui <- fluidPage(
                                  p("We're working on it..."),
                                  h3("Give feedback?"),
                                  p("Raise an issue on the code ",
-                                 a("repo.", href="https://git.soton.ac.uk/ba1e12/carbonator/-/issues")
-                                 ),
-                                 h3("Spread the word?"),
-                                 p( 
-                                   #https://community.rstudio.com/t/include-a-button-in-a-shiny-app-to-tweet-the-url-to-the-app/8113/2
-                                 # Create url with the 'twitter-share-button' class
-                                   tags$a(href=appUrl, "Twitter", class="twitter-share-button"),
-                                   # Copy the script from https://dev.twitter.com/web/javascript/loading into your app
-                                   # You can source it from the URL below. It must go after you've created your link
-                                   includeScript("http://platform.twitter.com/widgets.js"),
-                                   " is our viral medium of choice."
-                                   )
-                        )
+                                 a("repo", href="https://github.com/dataknut/carbonator/issues?q=is%3Aissue"), ".",
+                                 )
+                        ),
+                        fluidRow(p(),
+                                 # > brought to you by ----
+                                 hr(),
+                                 p("The carbonator is brought to you by ",
+                                   a("@dataknut", href="https://twitter.com/dataknut"), ",",
+                                   a("@energySoton", href="https://twitter.com/energysoton"), " and ",
+                                   a("@UoSEngineering", href="https://twitter.com/UoSEngineering")
+                                   ),
+                                 p("The code is open source under an ", a("MIT license", 
+                                                                          href="https://github.com/dataknut/carbonator/blob/master/LICENSE"), 
+                                   " and the plots are licensed for re-use as 'Free Cultural Works' under ", a("CC-BY", 
+                                                                           href="https://creativecommons.org/licenses/by/4.0/"),
+                                 ". What does this mean? Do what you want with them but please tell people where they came from.")  
+                                 )
             )
         )
     )
 )
-# <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-via="dataknut" data-hashtags="carbonator" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
 # Define server ----
 server <- function(input, output) {
 
     output$distPlot <- renderPlot({
-        # generate input$xxxx from ui.R
+        # > generate input$xxxx from ui.R ----
         dt <- data.table()
         dt <- rbind(dt,
-                    # must be an easier way
+                    # has to be an easier way
                       cbind("Energy: Electricity", input$elec * factor_dt[Contributor == "Electricity", mFactor]),
                       cbind("Energy: Gas", input$gas * factor_dt[Contributor == "Gas", mFactor]),
                     cbind("Energy: Oil", input$oil * factor_dt[Contributor == "Oil", mFactor]),
@@ -309,16 +333,20 @@ server <- function(input, output) {
                     cbind("Transport: Air", input$air * factor_dt[Contributor  %like% "Air", mFactor]),
                     cbind("Diet", input$diet)
                       )
-        # draw the bar chart
+        # > draw the bar chart ----
         dt[, source := V1]
         dt[, co2e := as.numeric(V2)]
+        totalCarbon <- sum(dt$co2e, na.rm = TRUE) # may be 0 etc
         ggplot2::ggplot(dt[co2e > 0], aes(x = source, y = co2e/1000, fill = V1)) +
             geom_col() +
             scale_fill_viridis_d(guide=FALSE) +
             labs(y = "Tonnes CO2e",
-                 x = "Source") +
+                 x = "Source",
+                 caption = paste0("Total CO2e: ", round(totalCarbon/1000,1), " tonnes (UK conversion factors)", 
+                                  "\n\nSource: dataknut.shinyapps.io/Carbonator/")
+                 ) +
             coord_flip()
-        #totalCarbon <- sum(dt$co2e)
+        #
         #p("Total carbon footprint:" , totalCarbon)
     })
 }
