@@ -14,10 +14,13 @@ library(shiny)
 library(ggplot2)
 library(data.table)
 
-# load factors
-factor_dt <- data.table::fread("data/2019.csv")
+# Parameters ----
+appUrl <- "https://twitter.com/intent/tweet?text=carbonator%20from%20@dataknut%20@energySoton&url=https://dataknut.shinyapps.io/Carbonator/"
 
-# Define UI for application that draws a histogram
+# load conversion factors ----
+factor_dt <- data.table::fread("data/2019.csv") # coding and labels matter - we use them below
+
+# Define UI ----
 ui <- fluidPage(
 
     # Application title
@@ -35,6 +38,7 @@ ui <- fluidPage(
         mainPanel(
             tabsetPanel(type = "tabs",
                         tabPanel("Heat and hot water", 
+                                 # > Heat & hot water ----
                                  fluidRow(
                                      column(3,helpText("Electricity (", 
                                                        factor_dt[Contributor == "Electricity", unit],")"
@@ -45,7 +49,7 @@ ui <- fluidPage(
                                                            label = ""
                                      )
                                      ),
-                                     column(4,helpText(factor_dt[Contributor == "Electricity", mFactor], " Kg CO2e/kWh (BEIS 2018)")
+                                     column(4,helpText(factor_dt[Contributor == "Electricity", mFactor], " Kg CO2e/kWh (BEIS 2019)")
                                      )
                                  ),
                                  fluidRow(
@@ -98,8 +102,9 @@ ui <- fluidPage(
                                  )
                                  ),
                         tabPanel("Car use",
+                                 # > Car use ----
                                  fluidRow(
-                                     column(3,helpText("Car petrol < 1.4l (", factor_dt[Contributor %like% "< 1.4", unit], ")"
+                                     column(4,helpText("Car petrol < 1.4l (", factor_dt[Contributor %like% "< 1.4", unit], ")"
                                      )
                                      ),
                                      column(2,numericInput("car14l", 
@@ -111,7 +116,7 @@ ui <- fluidPage(
                                      )
                                  ),
                                  fluidRow(
-                                     column(3,helpText("Car petrol > 1.4l (", factor_dt[Contributor %like% "> 1.4", unit], ")"
+                                     column(4,helpText("Car petrol > 1.4l (", factor_dt[Contributor %like% "> 1.4", unit], ")"
                                      )
                                      ),
                                      column(2,numericInput("car14m", 
@@ -123,7 +128,7 @@ ui <- fluidPage(
                                      )
                                  ),
                                  fluidRow(
-                                     column(3,helpText("Car diesel < 1.7l (", factor_dt[Contributor %like% "< 1.7", unit], ")"
+                                     column(4,helpText("Car diesel < 1.7l (", factor_dt[Contributor %like% "< 1.7", unit], ")"
                                      )
                                      ),
                                      column(2,numericInput("diesel17l", 
@@ -135,7 +140,7 @@ ui <- fluidPage(
                                      )
                                  ),
                                  fluidRow(
-                                     column(3,helpText("Car diesel > 1.7l (", factor_dt[Contributor %like% "> 1.7", unit], ")"
+                                     column(4,helpText("Car diesel > 1.7l (", factor_dt[Contributor %like% "> 1.7", unit], ")"
                                      )
                                      ),
                                      column(2,numericInput("diesel17m", 
@@ -147,7 +152,7 @@ ui <- fluidPage(
                                      )
                                  ),
                                  fluidRow(
-                                     column(3,helpText("Car elec (small) (", factor_dt[Contributor %like% "small", unit], ")"
+                                     column(4,helpText("Car elec (small) (", factor_dt[Contributor %like% "small", unit], ")"
                                      )
                                      ),
                                      column(2,numericInput("elecSmall", 
@@ -155,11 +160,11 @@ ui <- fluidPage(
                                                            label = ""
                                      )
                                      ),
-                                     column(4,helpText(factor_dt[Contributor  %like% "small", mFactor], " Kg CO2e/mile (BEIS 2018)")
+                                     column(4,helpText(factor_dt[Contributor  %like% "small", mFactor], " Kg CO2e/mile (BEIS 2019)")
                                      )
                                  ),
                                  fluidRow(
-                                     column(3,helpText("Car elec (medium) (", factor_dt[Contributor %like% "medium", unit], ")"
+                                     column(4,helpText("Car elec (medium) (", factor_dt[Contributor %like% "medium", unit], ")"
                                      )
                                      ),
                                      column(2,numericInput("elecMedium", 
@@ -167,11 +172,11 @@ ui <- fluidPage(
                                                            label = ""
                                      )
                                      ),
-                                     column(4,helpText(factor_dt[Contributor  %like% "medium", mFactor], " Kg CO2e/mile (BEIS 2018)")
+                                     column(4,helpText(factor_dt[Contributor  %like% "medium", mFactor], " Kg CO2e/mile (BEIS 2019)")
                                      )
                                  ),
                                  fluidRow(
-                                     column(3,helpText("Car elec (large) (", factor_dt[Contributor %like% "large", unit], ")"
+                                     column(4,helpText("Car elec (large) (", factor_dt[Contributor %like% "large", unit], ")"
                                      )
                                      ),
                                      column(2,numericInput("elecLarge", 
@@ -179,11 +184,12 @@ ui <- fluidPage(
                                                            label = ""
                                      )
                                      ),
-                                     column(4,helpText(factor_dt[Contributor  %like% "large", mFactor], " Kg CO2e/mile (BEIS 2018)")
+                                     column(4,helpText(factor_dt[Contributor  %like% "large", mFactor], " Kg CO2e/mile (BEIS 2019)")
                                      )
                                  )
                                  ),
                         tabPanel("Public transport", 
+                                 # > Pubic transport ----
                                  fluidRow(
                                      column(3,helpText("Bus (", factor_dt[Contributor %like% "Bus", unit], ")"
                                      )
@@ -222,6 +228,7 @@ ui <- fluidPage(
                                  )
                                  ),
                         tabPanel("Diet", 
+                                 # > Diet ----
                                  fluidRow(
                                      column(4,helpText("Diet (choose)"
                                      )
@@ -236,26 +243,47 @@ ui <- fluidPage(
                                             p("Vegan, low waste: 1100 Kg CO2e"),
                                             p("Ignore diet: 0 Kg CO2e"),
                                                 p("If you want to investigate the carbon footprint of your food try the ",
-                                                a("BBC calculator", 
+                                                a("BBC calculator.", 
                                                   href = "https://www.bbc.co.uk/news/science-environment-46459714")
-                                                ),
+                                                )
                                      )
-                                 ))
-            ),
-            p("Enter your own yearly numbers above to get your annual CO2e carbon footprint (in kg)."),
-            p("Or just enter any old number to see what happens. For example you can compare trains & planes for the same journey distance."),
-            p("To reset the default values just reload the page."),
-            p(),
-            p("Data source: Judith Thornton's ",
-              a("carbon footprint calculator", 
-                href = dSource), " or"),
-            p("(BEIS 2018) ",
-              a("table", href = ""))
+                                 )
+                                 ),
+                        tabPanel("How to...", 
+                                 # > How to ----
+                                 h3("Use the carbonator:"),
+                                 p("Enter your own yearly numbers to get your annual CO2e carbon footprint (in kg)."),
+                                 p("Or just enter any old number to see what happens. For example you can compare trains & planes for the same journey distance."),
+                                 p("To reset the default values just reload the page."),
+                                 h3("Find the data sources:"),
+                                 p("We've used conversion factors from Judith Thornton's ",
+                                   a("carbon footprint calculator", 
+                                     href = dSource), " and also the BEIS (2019)",
+                                   a("table", href = beisSource, ".")),
+                                 h3("Update the conversion factors:"),
+                                 p("Clearly the conversion factors we use will go out of date as e.g. the carbon intensity of electricity generation and the efficiency of other technologies change."),
+                                 p("We're working on it..."),
+                                 h3("Give feedback:"),
+                                 p("Raise an issue on the code ",
+                                 a("repo.", href="https://git.soton.ac.uk/ba1e12/carbonator/-/issues")
+                                 ),
+                                 h3("Spread the word:"),
+                                 p( 
+                                   #https://community.rstudio.com/t/include-a-button-in-a-shiny-app-to-tweet-the-url-to-the-app/8113/2
+                                 # Create url with the 'twitter-share-button' class
+                                   tags$a(href=appUrl, "Twitter", class="twitter-share-button"),
+                                   # Copy the script from https://dev.twitter.com/web/javascript/loading into your app
+                                   # You can source it from the URL below. It must go after you've created your link
+                                   includeScript("http://platform.twitter.com/widgets.js"),
+                                   " is our viral medium of choice."
+                                   )
+                        )
+            )
         )
     )
 )
-
-# Define server logic required to draw a histogram
+# <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-via="dataknut" data-hashtags="carbonator" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+# Define server ----
 server <- function(input, output) {
 
     output$distPlot <- renderPlot({
