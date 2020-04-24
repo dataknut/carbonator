@@ -24,7 +24,7 @@ factor_dt <- data.table::fread("data/2019.csv") # coding and labels matter - we 
 ui <- fluidPage(
 
     # Application title
-    titlePanel("The Carbonator - a UK personal emissions explorer)"),
+    titlePanel("The Carbonator - a UK personal emissions explorer"),
 
     # Sidebar with a slider input for number of bins 
     sidebarLayout(position = "right",
@@ -44,7 +44,7 @@ ui <- fluidPage(
                                                        factor_dt[Contributor == "Electricity", unit],")"
                                      )
                                      ),
-                                     column(2,numericInput("elec", 
+                                     column(3,numericInput("elec", 
                                                            value = factor_dt[Contributor == "Electricity", Usage],
                                                            label = ""
                                      )
@@ -56,7 +56,7 @@ ui <- fluidPage(
                                      column(3,helpText("Gas (", factor_dt[Contributor == "Gas", unit],")"
                                      )
                                      ),
-                                     column(2,numericInput("gas", 
+                                     column(3,numericInput("gas", 
                                                            value = factor_dt[Contributor == "Gas", Usage],
                                                            label = ""
                                      )
@@ -68,7 +68,7 @@ ui <- fluidPage(
                                      column(3,helpText("Oil (", factor_dt[Contributor == "Oil", unit], ")"
                                      )
                                      ),
-                                     column(2,numericInput("oil", 
+                                     column(3,numericInput("oil", 
                                                            value = factor_dt[Contributor == "Oil", Usage],
                                                            label = ""
                                      )
@@ -80,7 +80,7 @@ ui <- fluidPage(
                                      column(3,helpText("Coal (", factor_dt[Contributor == "Coal", unit], ")"
                                      )
                                      ),
-                                     column(2,numericInput("coal", 
+                                     column(3,numericInput("coal", 
                                                            value = factor_dt[Contributor == "Coal", Usage],
                                                            label = ""
                                      )
@@ -92,7 +92,7 @@ ui <- fluidPage(
                                      column(3,helpText("Wood (", factor_dt[Contributor == "Wood", unit], ")"
                                      )
                                      ),
-                                     column(2,numericInput("wood", 
+                                     column(3,numericInput("wood", 
                                                            value = factor_dt[Contributor == "Wood", Usage],
                                                            label = ""
                                      )
@@ -107,7 +107,7 @@ ui <- fluidPage(
                                      column(4,helpText("Car petrol < 1.4l (", factor_dt[Contributor %like% "< 1.4", unit], ")"
                                      )
                                      ),
-                                     column(2,numericInput("car14l", 
+                                     column(3,numericInput("car14l", 
                                                            value = factor_dt[Contributor %like% "< 1.4", Usage],
                                                            label = ""
                                      )
@@ -119,7 +119,7 @@ ui <- fluidPage(
                                      column(4,helpText("Car petrol > 1.4l (", factor_dt[Contributor %like% "> 1.4", unit], ")"
                                      )
                                      ),
-                                     column(2,numericInput("car14m", 
+                                     column(3,numericInput("car14m", 
                                                            value = factor_dt[Contributor %like% "> 1.4", Usage],
                                                            label = ""
                                      )
@@ -131,7 +131,7 @@ ui <- fluidPage(
                                      column(4,helpText("Car diesel < 1.7l (", factor_dt[Contributor %like% "< 1.7", unit], ")"
                                      )
                                      ),
-                                     column(2,numericInput("diesel17l", 
+                                     column(3,numericInput("diesel17l", 
                                                            value = factor_dt[Contributor %like% "< 1.7", Usage],
                                                            label = ""
                                      )
@@ -143,7 +143,7 @@ ui <- fluidPage(
                                      column(4,helpText("Car diesel > 1.7l (", factor_dt[Contributor %like% "> 1.7", unit], ")"
                                      )
                                      ),
-                                     column(2,numericInput("diesel17m", 
+                                     column(3,numericInput("diesel17m", 
                                                            value = factor_dt[Contributor %like% "> 1.7", Usage],
                                                            label = ""
                                      )
@@ -155,7 +155,7 @@ ui <- fluidPage(
                                      column(4,helpText("Car elec (small) (", factor_dt[Contributor %like% "small", unit], ")"
                                      )
                                      ),
-                                     column(2,numericInput("elecSmall", 
+                                     column(3,numericInput("elecSmall", 
                                                            value = factor_dt[Contributor %like% "small", Usage],
                                                            label = ""
                                      )
@@ -167,7 +167,7 @@ ui <- fluidPage(
                                      column(4,helpText("Car elec (medium) (", factor_dt[Contributor %like% "medium", unit], ")"
                                      )
                                      ),
-                                     column(2,numericInput("elecMedium", 
+                                     column(3,numericInput("elecMedium", 
                                                            value = factor_dt[Contributor %like% "medium", Usage],
                                                            label = ""
                                      )
@@ -179,7 +179,7 @@ ui <- fluidPage(
                                      column(4,helpText("Car elec (large) (", factor_dt[Contributor %like% "large", unit], ")"
                                      )
                                      ),
-                                     column(2,numericInput("elecLarge", 
+                                     column(3,numericInput("elecLarge", 
                                                            value = factor_dt[Contributor %like% "large", Usage],
                                                            label = ""
                                      )
@@ -194,7 +194,7 @@ ui <- fluidPage(
                                      column(3,helpText("Bus (", factor_dt[Contributor %like% "Bus", unit], ")"
                                      )
                                      ),
-                                     column(2,numericInput("bus", 
+                                     column(3,numericInput("bus", 
                                                            value = factor_dt[Contributor %like% "Bus", Usage],
                                                            label = ""
                                      )
@@ -206,7 +206,7 @@ ui <- fluidPage(
                                      column(3,helpText("Train (", factor_dt[Contributor %like% "Train", unit], ")"
                                      )
                                      ),
-                                     column(2,numericInput("train", 
+                                     column(3,numericInput("train", 
                                                            value = factor_dt[Contributor %like% "Train", Usage],
                                                            label = ""
                                      )
@@ -218,7 +218,7 @@ ui <- fluidPage(
                                      column(3,helpText("Air (", factor_dt[Contributor %like% "Air", unit], ")"
                                      )
                                      ),
-                                     column(2,numericInput("air", 
+                                     column(3,numericInput("air", 
                                                            value = factor_dt[Contributor %like% "Air", Usage],
                                                            label = ""
                                      )
@@ -233,7 +233,7 @@ ui <- fluidPage(
                                      column(4,helpText("Diet (choose)"
                                      )
                                      ),
-                                     column(3,selectInput("diet", label = "",
+                                     column(4,selectInput("diet", label = "",
                                                           choices = list("Standard " = 2200, 
                                                                          "Vegan with minimal processed food & low waste " = 1100,
                                                                          "Ignore my diet" = 0),
@@ -251,24 +251,24 @@ ui <- fluidPage(
                                  ),
                         tabPanel("How to...", 
                                  # > How to ----
-                                 h3("Use the carbonator:"),
+                                 h3("Use the carbonator?"),
                                  p("Enter your own yearly numbers to get your annual CO2e carbon footprint (in kg)."),
                                  p("Or just enter any old number to see what happens. For example you can compare trains & planes for the same journey distance."),
                                  p("To reset the default values just reload the page."),
-                                 h3("Find the data sources:"),
+                                 h3("Check the data sources?"),
                                  p("We've used United Kingdom (UK) conversion factors from Judith Thornton's ",
                                    a("carbon footprint calculator", 
-                                     href = dSource), " and also the BEIS (2019). The calculations may not be valid for other countries #ymmv.",
-                                   a("table", href = beisSource, ".")),
-                                 h3("Update the conversion factors:"),
+                                     href = dSource), " and also the BEIS (2019) ",
+                                   a("table", href = beisSource, "."), "The calculations may not be valid for other countries #ymmv."),
+                                 h3("Update the conversion factors?"),
                                  p("Clearly the conversion factors we use will go out of date as e.g. the carbon intensity of electricity generation and the efficiency of other technologies change."),
                                  p("They are also different in different countries and at different times of day in the case of electricity."),
                                  p("We're working on it..."),
-                                 h3("Give feedback:"),
+                                 h3("Give feedback?"),
                                  p("Raise an issue on the code ",
                                  a("repo.", href="https://git.soton.ac.uk/ba1e12/carbonator/-/issues")
                                  ),
-                                 h3("Spread the word:"),
+                                 h3("Spread the word?"),
                                  p( 
                                    #https://community.rstudio.com/t/include-a-button-in-a-shiny-app-to-tweet-the-url-to-the-app/8113/2
                                  # Create url with the 'twitter-share-button' class
