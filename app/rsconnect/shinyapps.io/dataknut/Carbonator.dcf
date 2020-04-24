@@ -5,6 +5,6 @@ account: dataknut
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 2179638
-bundleId: 3060487
+bundleId: 3060753
 url: https://dataknut.shinyapps.io/Carbonator/
-when: 1587746318.98185
+when: 1587749557.52311
