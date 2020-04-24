@@ -24,7 +24,7 @@ factor_dt <- data.table::fread("data/2019.csv") # coding and labels matter - we 
 ui <- fluidPage(
 
     # Application title
-    titlePanel("The Carbonator"),
+    titlePanel("The Carbonator - a UK personal emissions explorer)"),
 
     # Sidebar with a slider input for number of bins 
     sidebarLayout(position = "right",
@@ -256,12 +256,13 @@ ui <- fluidPage(
                                  p("Or just enter any old number to see what happens. For example you can compare trains & planes for the same journey distance."),
                                  p("To reset the default values just reload the page."),
                                  h3("Find the data sources:"),
-                                 p("We've used conversion factors from Judith Thornton's ",
+                                 p("We've used United Kingdom (UK) conversion factors from Judith Thornton's ",
                                    a("carbon footprint calculator", 
-                                     href = dSource), " and also the BEIS (2019)",
+                                     href = dSource), " and also the BEIS (2019). The calculations may not be valid for other countries #ymmv.",
                                    a("table", href = beisSource, ".")),
                                  h3("Update the conversion factors:"),
                                  p("Clearly the conversion factors we use will go out of date as e.g. the carbon intensity of electricity generation and the efficiency of other technologies change."),
+                                 p("They are also different in different countries and at different times of day in the case of electricity."),
                                  p("We're working on it..."),
                                  h3("Give feedback:"),
                                  p("Raise an issue on the code ",
