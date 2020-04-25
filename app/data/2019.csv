@@ -1,19 +1,18 @@
-﻿Contributor,mFactor,unit,Usage,kg CO2 e,Source:,url
-Electricity,0.26,kWh,3500,3067,BEIS 2019, https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2019
-Gas,0.185,kWh,13000,1850,,
-Wood,190,tonnes,1,380,,
-Oil,2.53,litres,0,2530,,
-Coal,2881.65,tonnes,0,2882,,
-"car, petrol < 1.4l",0.25,miles,10000,2500,,
-"car, petrol > 1.4l",0.457,miles,,4570,,
-"car, diesel < 1.7l",0.234,miles,,2340,,
-"car, diesel > 1.7l",0.346,miles,,3460,,
-elec (small),0.07,miles,,735,BEIS 2018,https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2019
-elec (medium),0.09,miles,,856,BEIS 2018,https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2019
-elec (large),0.11,miles,,1076,BEIS 2018,https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2019
-Bus,0.197,miles,4000,1970,,
-Train,0.075,miles,5000,750,,
-Air,0.255,miles,10000,2550,,
-standard diet,2200,,,2200,,
-"vegan, min processed, low waste",1100,,,,,
-,,,,33716,,
+﻿Contributor,mFactor,unit,Usage,kg CO2 e,mFactorSource,mFactorUrl,usageSource,usageUrl
+Electricity,0.26,kWh,3800,988,BEIS (2019), https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2019,BEIS (2019),https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/695880/Domestic_energy_bills_in_2017_-_The_impact_of_variable_consumption.pdf
+Gas,0.185,kWh,15000,2775,Thornton (2020),https://lowcarbonbuildings.wordpress.com/2020/02/29/the-carbon-footprint-of-production-and-how-much-it-matters-part-1/,BEIS (2019),https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/695880/Domestic_energy_bills_in_2017_-_The_impact_of_variable_consumption.pdf
+Wood,190,tonnes,0,0,Thornton (2020),https://lowcarbonbuildings.wordpress.com/2020/02/29/the-carbon-footprint-of-production-and-how-much-it-matters-part-1/,,
+Oil,2.53,litres,0,0,Thornton (2020),https://lowcarbonbuildings.wordpress.com/2020/02/29/the-carbon-footprint-of-production-and-how-much-it-matters-part-1/,,
+Coal,2881.65,tonnes,0,0,Thornton (2020),https://lowcarbonbuildings.wordpress.com/2020/02/29/the-carbon-footprint-of-production-and-how-much-it-matters-part-1/,,
+"car, petrol < 1.4l",0.25,miles,3200,800,Thornton (2020),https://lowcarbonbuildings.wordpress.com/2020/02/29/the-carbon-footprint-of-production-and-how-much-it-matters-part-1/,DfT 2018,https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/821414/nts0303.ods
+"car, petrol > 1.4l",0.457,miles,0,0,Thornton (2020),https://lowcarbonbuildings.wordpress.com/2020/02/29/the-carbon-footprint-of-production-and-how-much-it-matters-part-1/,,
+"car, diesel < 1.7l",0.234,miles,0,0,Thornton (2020),https://lowcarbonbuildings.wordpress.com/2020/02/29/the-carbon-footprint-of-production-and-how-much-it-matters-part-1/,,
+"car, diesel > 1.7l",0.346,miles,0,0,Thornton (2020),https://lowcarbonbuildings.wordpress.com/2020/02/29/the-carbon-footprint-of-production-and-how-much-it-matters-part-1/,,
+elec (small),0.07,miles,0,0,BEIS (2019),https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2019,,
+elec (medium),0.09,miles,0,0,BEIS (2019),https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2019,,
+elec (large),0.11,miles,0,0,BEIS (2019),https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2019,,
+Bus,0.197,miles,90,17.73,Thornton (2020),https://lowcarbonbuildings.wordpress.com/2020/02/29/the-carbon-footprint-of-production-and-how-much-it-matters-part-1/,DfT (2018),https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/821414/nts0303.ods
+Train,0.075,miles,600,45,Thornton (2020),https://lowcarbonbuildings.wordpress.com/2020/02/29/the-carbon-footprint-of-production-and-how-much-it-matters-part-1/,DfT (2018),https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/821414/nts0303.ods
+Air,0.255,miles,4600,1173,Thornton (2020),https://lowcarbonbuildings.wordpress.com/2020/02/29/the-carbon-footprint-of-production-and-how-much-it-matters-part-1/,CSE (2013) reverse calculation,
+standard diet,2200,,,0,Thornton (2020),https://lowcarbonbuildings.wordpress.com/2020/02/29/the-carbon-footprint-of-production-and-how-much-it-matters-part-1/,,
+"vegan, min processed, low waste",1100,,,0,Thornton (2020),https://lowcarbonbuildings.wordpress.com/2020/02/29/the-carbon-footprint-of-production-and-how-much-it-matters-part-1/,,
